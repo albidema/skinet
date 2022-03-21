@@ -48,14 +48,14 @@ export class BasketService {
     this.setBasket(basket);
   }
 
-  private incrementItemQuantity(item: IBasketItem) {
+   incrementItemQuantity(item: IBasketItem) {
     const basket = this.getCurrentBasketValue();
     const foundItemIndex = basket.items.findIndex(x => x.id === item.id);
     basket.items[foundItemIndex].quantity++;
     this.setBasket(basket);
   }
 
-  private decrementItemQuantity(item: IBasketItem) {
+   decrementItemQuantity(item: IBasketItem) {
     const basket = this.getCurrentBasketValue();
     const foundItemIndex = basket.items.findIndex(x => x.id === item.id);
     if (basket.items[foundItemIndex].quantity > 1) { 

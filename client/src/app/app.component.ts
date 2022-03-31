@@ -5,12 +5,15 @@ import { BasketService } from './basket/basket.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
   title = 'SkiNet';
 
-  constructor(private basketService: BasketService, private accountService: AccountService) {}
+  constructor(
+    private basketService: BasketService,
+    private accountService: AccountService
+  ) {}
 
   ngOnInit(): void {
     this.loadBasket();
@@ -19,11 +22,14 @@ export class AppComponent implements OnInit {
 
   loadCurrentUser() {
     const token = localStorage.getItem('token');
-    if (token) {
-      this.accountService.loadCurrentUser(token).subscribe(() => { 
-        console.log('user loaded')
-    }, error => { console.log(error) });
-    }
+    this.accountService.loadCurrentUser(token).subscribe(
+      () => {
+        console.log('user loaded');
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   loadBasket() {
@@ -32,10 +38,11 @@ export class AppComponent implements OnInit {
       this.basketService.getBasket(basketId).subscribe(
         () => {
           console.log('initialised basket');
-        }, error => {
+        },
+        (error) => {
           console.log(error);
-        });
+        }
+      );
     }
   }
-  
 }
